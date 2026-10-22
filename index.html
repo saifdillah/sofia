@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>a very important question</title>
+<meta name="description" content="pls open this">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦝</text></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<canvas id="fx"></canvas>
+
+<main id="app">
+
+  <!-- 1. the question -->
+  <section class="page active" data-page="ask" data-locked>
+    <div class="card">
+      <div class="big-emoji wiggle">🦝</div>
+      <h1>Sofia, can I steal you for a day?</h1>
+      <p class="sub">perhaps... a little date? <span class="hahaha">HAHAHAHAH</span></p>
+      <div class="btn-row">
+        <button id="yes" class="btn btn-yes">Yes</button>
+        <button id="no" class="btn btn-no">No</button>
+      </div>
+      <p class="scribble">(choose wisely)</p>
+    </div>
+  </section>
+
+  <!-- 2. yay -->
+  <section class="page" data-page="yay">
+    <div class="card card-clear">
+      <h1 class="mega pop">YAY IT'S A DATE!!</h1>
+      <p class="scribble">contract signed. no take-backs. 🤝</p>
+    </div>
+  </section>
+
+  <!-- 3. the day -->
+  <section class="page" data-page="date">
+    <div class="card">
+      <p class="label">step one</p>
+      <h2>Free your day for...</h2>
+      <div class="calendar pop">
+        <div class="cal-top">DECEMBER</div>
+        <div class="cal-day">12</div>
+        <div class="cal-dow">saturday</div>
+      </div>
+      <p class="scribble">clear the schedule. cancel everything. tell your plants.</p>
+    </div>
+  </section>
+
+  <!-- 4. pickup -->
+  <section class="page" data-page="start">
+    <div class="card">
+      <p class="label">the plan</p>
+      <h2 class="reveal" style="--d:0">We start the day at <span class="hl">2:30pm</span>...</h2>
+      <p class="line reveal" style="--d:1">🚗 I'll get a car to pick you up</p>
+      <p class="line reveal" style="--d:2">🏠 then to mine</p>
+      <p class="line reveal" style="--d:3">📍 and then to this place called...</p>
+      <div class="big-emoji drum reveal" style="--d:4">🥁</div>
+    </div>
+  </section>
+
+  <!-- 5. studio frond + hue your days -->
+  <section class="page" data-page="frond">
+    <div class="card">
+      <h1 class="place pop">Studio Frond 🌿</h1>
+      <p class="line reveal" style="--d:1">☕ we'll grab a drink first</p>
+      <p class="line reveal" style="--d:2">then head to our next destination nearby...</p>
+      <h2 class="place-2 reveal" style="--d:3">Hue Your Days 🎨</h2>
+      <p class="line reveal" style="--d:4">we're doing <b>pottery painting</b> and we get to bring our masterpieces home</p>
+      <p class="line reveal" style="--d:5">so make sure to get your <span class="hl">Artsy Hat</span> on 🧑‍🎨</p>
+      <p class="scribble reveal" style="--d:6">(mine will be ugly. this is a promise.)</p>
+    </div>
+  </section>
+
+  <!-- 6. chill -->
+  <section class="page" data-page="chill">
+    <div class="card">
+      <h2 class="reveal" style="--d:0">After all that hard work... 😮‍💨</h2>
+      <p class="line reveal" style="--d:1">we'll walk over to <b>Studio Frond</b> 🌿</p>
+      <p class="line reveal" style="--d:2">for a drink 🧋 and a little flower 🌼</p>
+      <p class="line reveal" style="--d:3">and just chill before...</p>
+    </div>
+  </section>
+
+  <!-- 7. dinner surprise -->
+  <section class="page" data-page="dinner" data-locked>
+    <div class="card">
+      <p class="label">...dinner! 🍽️</p>
+      <h2>where are we going??</h2>
+      <button id="giftBox" class="gift" aria-label="open the surprise">
+        <span class="gift-emoji">🎁</span>
+        <span class="scribble">tap for the surprise</span>
+      </button>
+      <div id="dinnerReveal" class="dinner-reveal" hidden>
+        <h1 class="place">Breads Kitchen</h1>
+        <p class="sub">at <span class="hl">7pm</span> 🍞✨</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. home -->
+  <section class="page" data-page="home">
+    <div class="card">
+      <h2 class="reveal" style="--d:0">You'll be back before <span class="hl">11pm</span> 🌙</h2>
+      <p class="line reveal" style="--d:1">I'll send you home, safe and sound 🚕</p>
+      <p class="line reveal" style="--d:2">but ofc we can get dessert after dinner 🍦</p>
+      <p class="scribble reveal" style="--d:3">(dessert is non-negotiable actually)</p>
+    </div>
+  </section>
+
+  <!-- 9. the end -->
+  <section class="page" data-page="end" data-locked>
+    <div class="card card-clear">
+      <h1 class="mega pop">I can't wait :)</h1>
+      <p class="scribble">see you 12 December 🦝</p>
+      <button id="replay" class="btn btn-small">do it again</button>
+    </div>
+  </section>
+
+</main>
+
+<p id="hint" class="hint">tap anywhere to continue →</p>
+<button id="back" class="back" aria-label="go back">←</button>
+<div id="dots" class="dots"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
