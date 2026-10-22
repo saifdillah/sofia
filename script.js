@@ -17,6 +17,7 @@ function show(index) {
   hint.classList.toggle("show", !page.hasAttribute("data-locked"));
 
   const name = page.dataset.page;
+  if (name === "ask") resetAsk();
   if (name === "yay") fireworks(4500);
   if (name === "end") fireworks(3000, 0.5);
 }
@@ -83,8 +84,18 @@ no.addEventListener("mouseenter", runAway);
 no.addEventListener("touchstart", (e) => { e.preventDefault(); runAway(); }, { passive: false });
 no.addEventListener("click", (e) => { e.preventDefault(); runAway(); });
 
-yes.addEventListener("click", () => {
+// put both buttons back the way they started
+function resetAsk() {
+  dodges = 0;
+  no.textContent = noLines[0];
   no.classList.remove("running");
+  no.style.left = "";
+  no.style.top = "";
+  no.style.display = "";
+  yes.style.removeProperty("--grow");
+}
+
+yes.addEventListener("click", () => {
   no.style.display = "none";
   show(1);
 });
@@ -111,7 +122,6 @@ document.getElementById("replay").addEventListener("click", () => {
   gift.hidden = false;
   dinnerPage.setAttribute("data-locked", "");
   show(0);
-  // the No button stays gone. she already said yes :)
 });
 
 /* ---------- fireworks + confetti ---------- */
