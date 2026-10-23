@@ -261,13 +261,70 @@ h2 {
 
 /* ---------- dinner ---------- */
 
+.gift {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 18px auto 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--ink);
+  font: inherit;
+}
+
+.gift-emoji {
+  font-size: 5.5rem;
+  line-height: 1;
+  animation: jiggle 1.2s infinite;
+}
+
+.gift.opening .gift-emoji { animation: shake 0.12s infinite; }
+
+.gift .scribble { margin-top: 8px; }
+
 .dinner-reveal {
-  margin-top: 14px;
+  margin-top: 6px;
   animation: popIn 0.6s cubic-bezier(.34, 1.56, .64, 1) both;
 }
 
+.dinner-reveal .big-emoji { margin-bottom: 6px; }
+
 .dinner-reveal .place {
   color: var(--pink);
+  margin-bottom: 0;
+}
+
+.dinner-reveal .scribble { margin-top: 2px; }
+
+.clue {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 12px 28px 10px;
+  background: var(--yellow);
+  border: 3px dashed var(--ink);
+  border-radius: 16px;
+  animation: stamp 0.6s cubic-bezier(.34, 1.56, .64, 1) 0.5s both;
+}
+
+.clue-top {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.clue-time {
+  font-size: clamp(2.6rem, 11vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--pink);
+  text-shadow: 3px 3px 0 var(--ink);
+}
+
+.clue-bottom {
+  font-size: 1.1rem;
+  letter-spacing: 4px;
 }
 
 /* ---------- chrome ---------- */
@@ -362,6 +419,11 @@ h2 {
 @keyframes popIn {
   0% { opacity: 0; transform: scale(0.3) rotate(-8deg); }
   100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+@keyframes stamp {
+  0% { opacity: 0; transform: scale(0.3) rotate(-12deg); }
+  100% { opacity: 1; transform: scale(1) rotate(3deg); }
 }
 
 @keyframes wiggle {

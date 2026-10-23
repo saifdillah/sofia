@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦝</text></svg>">
-<link rel="stylesheet" href="style.css?v=2">
+<link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
 
@@ -87,13 +87,23 @@
   </section>
 
   <!-- 7. dinner surprise -->
-  <section class="page" data-page="dinner">
+  <section class="page" data-page="dinner" data-locked>
     <div class="card">
       <p class="label">...dinner! 🍽️</p>
       <h2>where are we going??</h2>
-      <div id="dinnerReveal" class="dinner-reveal">
-        <h1 class="place">It's a Surprise 🤫</h1>
-        <p class="sub">at <span class="hl">7pm</span> ✨</p>
+      <button id="giftBox" class="gift" aria-label="open the box">
+        <span class="gift-emoji">🎁</span>
+        <span class="scribble">tap to open 👀</span>
+      </button>
+      <div id="dinnerReveal" class="dinner-reveal" hidden>
+        <div class="big-emoji wiggle">🤫</div>
+        <h1 class="place">it's a surprise!</h1>
+        <p class="scribble">hehe. no peeking 🙈</p>
+        <div class="clue">
+          <p class="clue-top">the only clue you get</p>
+          <p class="clue-time">7pm</p>
+          <p class="clue-bottom">🍽️ ✨ 💕</p>
+        </div>
       </div>
     </div>
   </section>
@@ -123,6 +133,6 @@
 <button id="back" class="back" aria-label="go back">←</button>
 <div id="dots" class="dots"></div>
 
-<script src="script.js?v=2"></script>
+<script src="script.js?v=3"></script>
 </body>
 </html>

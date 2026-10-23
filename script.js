@@ -19,7 +19,6 @@ function show(index) {
   const name = page.dataset.page;
   if (name === "ask") resetAsk();
   if (name === "yay") fireworks(4500);
-  if (name === "dinner") dinnerConfetti();
   if (name === "end") fireworks(3000, 0.5);
 }
 
@@ -103,16 +102,33 @@ yes.addEventListener("click", () => {
 
 /* ---------- dinner surprise ---------- */
 
+const gift = document.getElementById("giftBox");
 const dinnerReveal = document.getElementById("dinnerReveal");
+const dinnerPage = pages.find((p) => p.dataset.page === "dinner");
 
-function dinnerConfetti() {
-  const r = dinnerReveal.getBoundingClientRect();
-  confetti(r.left + r.width / 2, r.top + r.height / 2);
-}
+// shake the box for a moment, then pop it open
+gift.addEventListener("click", () => {
+  if (gift.classList.contains("opening")) return;
+  gift.classList.add("opening");
+  setTimeout(() => {
+    gift.hidden = true;
+    gift.classList.remove("opening");
+    dinnerReveal.hidden = false;
+    dinnerPage.removeAttribute("data-locked");
+    hint.classList.add("show");
+    const r = dinnerReveal.getBoundingClientRect();
+    confetti(r.left + r.width / 2, r.top + r.height / 3);
+  }, 600);
+});
 
 /* ---------- replay ---------- */
 
-document.getElementById("replay").addEventListener("click", () => show(0));
+document.getElementById("replay").addEventListener("click", () => {
+  dinnerReveal.hidden = true;
+  gift.hidden = false;
+  dinnerPage.setAttribute("data-locked", "");
+  show(0);
+});
 
 /* ---------- fireworks + confetti ---------- */
 
