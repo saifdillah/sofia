@@ -17,7 +17,9 @@ function show(index) {
   hint.classList.toggle("show", !page.hasAttribute("data-locked"));
 
   const name = page.dataset.page;
+  stopDrumroll();
   if (name === "ask") resetAsk();
+  if (name === "start") drumroll();
   if (name === "yay") fireworks(4500);
   if (name === "end") fireworks(3000, 0.5);
 }
@@ -129,6 +131,51 @@ document.getElementById("replay").addEventListener("click", () => {
   dinnerPage.setAttribute("data-locked", "");
   show(0);
 });
+
+/* ---------- drumroll ---------- */
+
+let audio, noise, rollOut;
+
+function drumroll() {
+  audio = audio || new (window.AudioContext || window.webkitAudioContext)();
+  audio.resume();
+  if (!noise) {
+    noise = audio.createBuffer(1, audio.sampleRate * 2, audio.sampleRate);
+    const data = noise.getChannelData(0);
+    for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
+  }
+  rollOut = audio.createGain();
+  rollOut.connect(audio.destination);
+
+  // start when the 🥁 starts bouncing (see .drum in style.css), getting louder
+  const start = audio.currentTime + 2.6;
+  const length = 1.8;
+  for (let t = 0; t < length; t += 0.045) {
+    hit(start + t, 0.15 + 0.5 * (t / length), 0.07, 1200);
+  }
+  hit(start + length, 0.9, 0.25, 800);  // final whack
+  hit(start + length, 0.5, 1.4, 5000);  // cymbal
+}
+
+function hit(when, volume, decay, freq) {
+  const src = audio.createBufferSource();
+  src.buffer = noise;
+  const filter = audio.createBiquadFilter();
+  filter.type = "highpass";
+  filter.frequency.value = freq;
+  const gain = audio.createGain();
+  gain.gain.setValueAtTime(volume, when);
+  gain.gain.exponentialRampToValueAtTime(0.001, when + decay);
+  src.connect(filter).connect(gain).connect(rollOut);
+  src.start(when, Math.random() * 0.5, decay);
+}
+
+// cut it off if she taps on before it finishes
+function stopDrumroll() {
+  if (!rollOut) return;
+  rollOut.disconnect();
+  rollOut = null;
+}
 
 /* ---------- fireworks + confetti ---------- */
 
